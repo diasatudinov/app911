@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReOnboardingUIView: View {
+    @StateObject var homeVM = HomeViewModel()
     @State private var pageNum: Int = 1
     @State private var showSheet = false
     @AppStorage("signedUP") var signedUP: Bool = false
@@ -129,7 +130,7 @@ struct ReOnboardingUIView: View {
             }
             
         } else {
-            // TabUIView()
+            HomeUIView(viewModel: homeVM)
         }
     }
 }
