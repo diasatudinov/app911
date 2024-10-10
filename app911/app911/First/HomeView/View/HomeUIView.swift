@@ -684,7 +684,7 @@ struct HomeUIView: View {
                                     .foregroundColor(.blue)
                                     .padding(.top, 0.5)
                                     
-                                    Button("Add") {
+                                    Button("Edit") {
                                         if let category = selectedCategory,!categoryName.isEmpty {
                                             viewModel.editCategory(category, name: categoryName)
                                             categoryNameEditShow = false

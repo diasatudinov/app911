@@ -46,4 +46,23 @@ class HomeViewModel: ObservableObject {
     func editMoneySpent(_ money: Double) {
         moneySpent = money
     }
+    
+    // MARK: - Events
+    
+    func addEvent(_ category: Category, _ event: Event) {
+        if let index = categories.firstIndex(where: { $0.id == category.id }) {
+            categories[index].events.append(event)
+        }
+    }
+    
+    func editEvent(_ category: Category, _ event: Event, name: String, date: Date, location: String, status: String) {
+        if let index = categories.firstIndex(where: { $0.id == category.id }) {
+            if let eventIndex = categories[index].events.firstIndex(where: { $0.id == event.id }) {
+                categories[index].events[eventIndex].name = name
+                categories[index].events[eventIndex].date = date
+                categories[index].events[eventIndex].location = location
+                categories[index].events[eventIndex].status = status
+            }
+        }
+    }
 }
