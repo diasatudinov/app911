@@ -57,7 +57,8 @@ struct HomeCell: View {
                 HStack(alignment: .bottom) {
                     Spacer()
                     NavigationLink {
-                        
+                        EventsUIView(viewModel: viewModel, category: category)
+                            .navigationBarBackButtonHidden()
                     } label: {
                         ZStack {
                             Rectangle()
