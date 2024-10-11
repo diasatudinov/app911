@@ -18,6 +18,7 @@
 		2B0301E02CB55AF4003584BE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0301DF2CB55AF4003584BE /* HomeViewModel.swift */; };
 		2B0301E22CB57BD2003584BE /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0301E12CB57BD2003584BE /* HomeCell.swift */; };
 		2B0301E42CB57C21003584BE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0301E32CB57C21003584BE /* Category.swift */; };
+		2B4C504D2CB93A4500A6A682 /* TicketUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4C504C2CB93A4500A6A682 /* TicketUIView.swift */; };
 		2B556ED32CB7CF7D00E9ECA0 /* EventsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B556ED22CB7CF7D00E9ECA0 /* EventsUIView.swift */; };
 		2B556ED52CB7F1D200E9ECA0 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B556ED42CB7F1D200E9ECA0 /* EventCell.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		2B0301DF2CB55AF4003584BE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		2B0301E12CB57BD2003584BE /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		2B0301E32CB57C21003584BE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		2B4C504C2CB93A4500A6A682 /* TicketUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketUIView.swift; sourceTree = "<group>"; };
 		2B556ED22CB7CF7D00E9ECA0 /* EventsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsUIView.swift; sourceTree = "<group>"; };
 		2B556ED42CB7F1D200E9ECA0 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +101,7 @@
 		2B0301D12CB5466B003584BE /* First */ = {
 			isa = PBXGroup;
 			children = (
+				2B4C504B2CB93A3100A6A682 /* Ticket */,
 				2B556ECE2CB7CF4B00E9ECA0 /* EventsView */,
 				2B0301D92CB55A08003584BE /* HomeView */,
 				2B0301D22CB54671003584BE /* Onboarding */,
@@ -163,6 +166,14 @@
 				2B0301E32CB57C21003584BE /* Category.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2B4C504B2CB93A3100A6A682 /* Ticket */ = {
+			isa = PBXGroup;
+			children = (
+				2B4C504C2CB93A4500A6A682 /* TicketUIView.swift */,
+			);
+			path = Ticket;
 			sourceTree = "<group>";
 		};
 		2B556ECE2CB7CF4B00E9ECA0 /* EventsView */ = {
@@ -274,6 +285,7 @@
 				2B0301E02CB55AF4003584BE /* HomeViewModel.swift in Sources */,
 				2B0301D82CB55080003584BE /* UsOnboardingUIView.swift in Sources */,
 				2B556ED32CB7CF7D00E9ECA0 /* EventsUIView.swift in Sources */,
+				2B4C504D2CB93A4500A6A682 /* TicketUIView.swift in Sources */,
 				2B556ED52CB7F1D200E9ECA0 /* EventCell.swift in Sources */,
 				2B0301E42CB57C21003584BE /* Category.swift in Sources */,
 				2B0301D42CB54684003584BE /* ReOnboardingUIView.swift in Sources */,
