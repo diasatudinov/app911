@@ -93,7 +93,7 @@ struct EventsUIView: View {
                             ScrollView(showsIndicators: false){
                                 VStack {
                                     ForEach(category.events.filter({ $0.isArchive == false }), id: \.self) { event in
-                                        EventCell(event: event, onEdit: {
+                                        EventCell(viewModel: viewModel, category: category, event: event, onEdit: {
                                             selectedEvent = event
                                             editEventShow = true
                                         })
@@ -121,7 +121,7 @@ struct EventsUIView: View {
                             ScrollView(showsIndicators: false){
                                 VStack {
                                     ForEach(category.events.filter({ $0.isArchive == true }), id: \.self) { event in
-                                        EventCell(event: event, onEdit: {
+                                        EventCell(viewModel: viewModel, category: category, event: event, onEdit: {
                                             selectedEvent = event
                                             editEventShow = true
                                         })

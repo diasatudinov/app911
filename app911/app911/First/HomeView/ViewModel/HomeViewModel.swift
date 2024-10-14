@@ -9,6 +9,51 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     @Published var categories: [Category] = []
+    {
+        didSet {
+            savePlaces()
+        }
+    }
+    
+    private let placesFileName = "categories.json"
+    
+    init() {
+        loadPlaces()
+    }
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    private func placesFilePath() -> URL {
+        return getDocumentsDirectory().appendingPathComponent(placesFileName)
+    }
+    
+   
+    
+    private func savePlaces() {
+        DispatchQueue.global().async {
+            let encoder = JSONEncoder()
+            do {
+                let data = try encoder.encode(self.categories)
+                try data.write(to: self.placesFilePath())
+            } catch {
+                print("Failed to save players: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    private func loadPlaces() {
+        let decoder = JSONDecoder()
+        do {
+            let data = try Data(contentsOf: placesFilePath())
+            categories = try decoder.decode([Category].self, from: data)
+        } catch {
+            print("Failed to load players: \(error.localizedDescription)")
+        }
+    }
     
     @Published var activeEvent = 0
     @Published var totalEvent = 0
@@ -64,5 +109,43 @@ class HomeViewModel: ObservableObject {
                 categories[index].events[eventIndex].status = status
             }
         }
+    }
+    
+    func createTicket(_ category: Category, _ event: Event, _ ticket: Ticket) {
+        if let index = categories.firstIndex(where: { $0.id == category.id }) {
+            if let eventIndex = categories[index].events.firstIndex(where: { $0.id == event.id }) {
+                categories[index].events[eventIndex].ticket = ticket
+            }
+        }
+    }
+    
+    func deleteTicket(_ category: Category, _ event: Event) {
+        if let index = categories.firstIndex(where: { $0.id == category.id }) {
+            if let eventIndex = categories[index].events.firstIndex(where: { $0.id == event.id }) {
+                categories[index].events[eventIndex].ticket = nil
+            }
+        }
+    }
+    
+    func editTicket(_ category: Category, _ event: Event, image: UIImage?, name: String, date: String, location: String, position: String, price: String) {
+        if let index = categories.firstIndex(where: { $0.id == category.id }) {
+            if let eventIndex = categories[index].events.firstIndex(where: { $0.id == event.id }) {
+                categories[index].events[eventIndex].ticket?.image = image
+                categories[index].events[eventIndex].ticket?.name = name
+                categories[index].events[eventIndex].ticket?.date = date
+                categories[index].events[eventIndex].ticket?.location = location
+                categories[index].events[eventIndex].ticket?.rowPosition = position
+                categories[index].events[eventIndex].ticket?.price = price
+            }
+        }
+    }
+    
+    func getTicket(_ category: Category, _ event: Event) -> Ticket? {
+        if let index = categories.firstIndex(where: { $0.id == category.id }) {
+            if let eventIndex = categories[index].events.firstIndex(where: { $0.id == event.id }) {
+                return categories[index].events[eventIndex].ticket
+            }
+        }
+        return nil
     }
 }

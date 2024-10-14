@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct EventCell: View {
+    @ObservedObject var viewModel: HomeViewModel
+    @State var category: Category
     @State var event: Event
-    
+    @State private var showTicket = false
     let onEdit: () -> Void
     var body: some View {
         ZStack {
@@ -59,8 +61,8 @@ struct EventCell: View {
                 
                 HStack(alignment: .bottom) {
                     Spacer()
-                    NavigationLink {
-                        
+                    Button {
+                        showTicket = true
                     } label: {
                         ZStack {
                             Rectangle()
@@ -81,6 +83,9 @@ struct EventCell: View {
         RoundedRectangle(cornerRadius: 14)
             .stroke(lineWidth: 1).foregroundColor(.secondRed)
         )
+        .sheet(isPresented: $showTicket) {
+            TicketUIView(viewModel: viewModel, ticket: event.ticket, category: category, event: event)
+        }
     }
     
     private func formattedDate(date: Date) -> String {
@@ -91,5 +96,5 @@ struct EventCell: View {
 }
 
 #Preview {
-    EventCell(event: Event(name: "Chase Atlantic", date: Date(), location: "The Pavilion At Toyota Music Factory", status: "Used", ticket: nil), onEdit: {})
+    EventCell(viewModel: HomeViewModel(), category: Category(name: "sadasd", events: []), event: Event(name: "Chase Atlantic", date: Date(), location: "The Pavilion At Toyota Music Factory", status: "Used", ticket: nil), onEdit: {})
 }
