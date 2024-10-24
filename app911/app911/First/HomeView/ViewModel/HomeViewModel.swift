@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 class HomeViewModel: ObservableObject {
     @Published var categories: [Category] = []
@@ -147,5 +148,28 @@ class HomeViewModel: ObservableObject {
             }
         }
         return nil
+    }
+    
+    // MARK: - Settings
+    
+    func shareApp() {
+        guard let url = URL(string: "https://itunes.apple.com/app/id6737277432") else { return }
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let rootViewController = windowScene.windows.first?.rootViewController {
+            rootViewController.present(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    func rateApp() {
+        SKStoreReviewController.requestReview()
+    }
+    
+    func openUsagePolicy() {
+        guard let url = URL(string: "https://www.termsfeed.com/live/bea1d41e-d427-40cf-8ad3-e4cb19caca32") else { return }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }

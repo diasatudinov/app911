@@ -200,7 +200,7 @@ struct HomeUIView: View {
                         HStack {
                             
                             Button {
-                                
+                                viewModel.openUsagePolicy()
                             } label: {
                                 ZStack(alignment: .top) {
                                     Rectangle()
@@ -226,7 +226,7 @@ struct HomeUIView: View {
                             }
                             
                             Button {
-                                
+                                viewModel.rateApp()
                             } label: {
                                 ZStack(alignment: .top) {
                                     Rectangle()
@@ -252,7 +252,7 @@ struct HomeUIView: View {
                             }
                             
                             Button {
-                                
+                                viewModel.shareApp()
                             } label: {
                                 ZStack(alignment: .top) {
                                     Rectangle()
