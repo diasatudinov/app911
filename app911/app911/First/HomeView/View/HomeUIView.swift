@@ -27,6 +27,7 @@ struct HomeUIView: View {
     @State var categoryNameEditShow = false
     @State var selectedCategory: Category? = nil
     
+    @State private var eventShow = false
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -198,6 +199,33 @@ struct HomeUIView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
+                            
+                            Button {
+                                eventShow = true
+                            } label: {
+                                ZStack(alignment: .top) {
+                                    Rectangle()
+                                        .foregroundColor(.secondBg)
+                                        .cornerRadius(14)
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text("Quotex Event")
+                                            .font(.system(size: 20, weight: .semibold))
+                                            .foregroundColor(.black)
+                                        
+                                        Image("stars")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(height: 42)
+                                            .padding(15)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .stroke(lineWidth: 2).foregroundColor(.white)
+                                            )
+                                    }.padding(.top, 15)
+                                    
+                                }.frame(width: 180, height: 145)
+                            }
                             
                             Button {
                                 viewModel.openUsagePolicy()
@@ -707,10 +735,142 @@ struct HomeUIView: View {
                     }
                 }
             }
+            
+            if !eventShow {
+                VStack {
+                    Spacer()
+                    EventView(editOrderShow: $eventShow, viewModel: viewModel)
+                }
+            }
+           
         }
     }
 }
 
 #Preview {
     HomeUIView(viewModel: HomeViewModel())
+}
+
+
+struct EventView: View {
+    @Binding var editOrderShow: Bool
+    @ObservedObject var viewModel: HomeViewModel
+    
+    @State var name = ""
+    @State var date = Date()
+    @State var location = ""
+    @State var status = ""
+    
+    @State var datePickerShow = false
+    @State private var isKeyboardVisible = false
+    var body: some View {
+            
+            
+            ZStack {
+                Rectangle()
+                    .foregroundColor(.white)
+                    .ignoresSafeArea(edges: .bottom)
+                    .cornerRadius(13)
+                
+                VStack(spacing: 0) {
+                    ZStack {
+                        Rectangle()
+                            .foregroundColor(.secondRed)
+                            .frame(height: 50)
+                            .clipShape(RoundedCorner(radius: 13, corners: [.topLeft, .topRight]))
+                        
+                        HStack {
+                            Button {
+                                editOrderShow = false
+                            } label: {
+                                Text("Cancel")
+                                    .foregroundColor(.white)
+                            }
+                            Spacer()
+                            Text("Quotex Event")
+                                .font(.system(size: 17, weight: .semibold))
+                                .foregroundColor(.white)
+                            Spacer()
+                            Text("Cancel")
+                                .foregroundColor(.clear)
+                            
+                        }.padding(.horizontal)
+                    }.frame(height: 50)
+                    Rectangle()
+                        .frame(height: 0.5)
+                        .foregroundColor(.gray.opacity(0.3))
+                   
+                    Image(.eventBanner)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: UIScreen.main.bounds.width)
+                        .padding(.bottom, 15)
+                    
+                    Text("Start now!")
+                        .font(.system(size: 28, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(.bottom, 10)
+                    
+                    Text("Сome up with and complete thematic tasks and get points, which can later be exchanged for discounts and coupons")
+                        .font(.system(size: 17, weight: .regular))
+                        .foregroundColor(.black.opacity(0.7))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 35)
+
+                    Spacer()
+                    
+                    NavigationLink {
+                        
+                    } label: {
+                        ZStack {
+                            Rectangle()
+                                .frame(height: 52)
+                                .cornerRadius(14)
+                                .padding(.horizontal)
+                                .foregroundColor(.mainRed)
+                            Text("Go to event")
+                                .font(.system(size: 17, weight: .semibold))
+                                .foregroundColor(.white)
+                                
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    
+                }
+            }.frame(height: UIScreen.main.bounds.height * 0.6)
+                .padding(.bottom, isKeyboardVisible ? 0 : -35)
+        
+        
+        .onAppear {
+            // Подписываемся на уведомления о клавиатуре
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillShowNotification,
+                object: nil,
+                queue: .main
+            ) { _ in
+                isKeyboardVisible = true
+            }
+            
+            NotificationCenter.default.addObserver(
+                forName: UIResponder.keyboardWillHideNotification,
+                object: nil,
+                queue: .main
+            ) { _ in
+                isKeyboardVisible = false
+            }
+        }
+        .onDisappear {
+            // Отписываемся от уведомлений, чтобы избежать утечек памяти
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+    }
+    
+    private func formattedDate(date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, yyyy"
+        return formatter.string(from: date)
+    }
 }

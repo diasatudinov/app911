@@ -172,4 +172,8 @@ class HomeViewModel: ObservableObject {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
+    
+    // MARK: Event
+    
+    @Published var tasks: [String] = []
 }
