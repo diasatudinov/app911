@@ -23,7 +23,7 @@ struct LoaderView: View {
                     Image("logo911")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: UIScreen.main.bounds.width - 64)
+                        .frame(width: UIScreen.main.bounds.width - 170)
                         .padding(.top, UIScreen.main.bounds.height / 10)
                     Spacer()
                     ZStack {

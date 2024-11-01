@@ -22,7 +22,7 @@ struct UsOnboardingUIView: View {
                 ZStack {
                     Color.onboardingBG
                         .ignoresSafeArea()
-                    Image("img-onboardingBG")
+                    Image("userBg911")
                         .resizable()
                         .scaledToFill()
                         .ignoresSafeArea()
@@ -33,11 +33,13 @@ struct UsOnboardingUIView: View {
                             switch pageNum {
                             case 1:
                                 VStack {
-                                    
-                                    Image("firstScreen911")
+                                    Spacer()
+                                    Image("onboardingLogo")
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(width: UIScreen.main.bounds.width)
+                                        .frame(width: UIScreen.main.bounds.width - 120)
+                                    Spacer()
+                                    Spacer()
                                     
                                 }
                             case 2: Image("ratings911")
@@ -132,7 +134,7 @@ struct UsOnboardingUIView: View {
                     ZStack {
                         Color.onboardingBG
                             .ignoresSafeArea()
-                        Image("img-onboardingBG")
+                        Image("onboardingBg911")
                             .resizable()
                             .scaledToFill()
                             .ignoresSafeArea()
