@@ -190,8 +190,8 @@ struct EventUpView: View {
                                     }
                                 }
                                 
-                                Button {
-                                    
+                                NavigationLink {
+                                    DiscountsView(viewModel: viewModel).navigationBarBackButtonHidden()
                                 } label: {
                                     
                                     ZStack {

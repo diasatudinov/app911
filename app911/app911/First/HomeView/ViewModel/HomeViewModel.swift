@@ -21,6 +21,7 @@ class HomeViewModel: ObservableObject {
     init() {
         loadPlaces()
         loadTasks()
+        loadDiscounts()
     }
     
     private func getDocumentsDirectory() -> URL {
@@ -174,11 +175,9 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    // MARK: Event
+    // MARK: Tasks
     
-    @Published var tasks: [Task] = [Task(name: "Concert", location: "The Pavilion At Toyota Music Factory", date: Date(), description: "Go to an event concert with 10 friends. Buy tickets in advance and arrange transportation to the venue."),
-                                    Task(name: "Concert", location: "The Pavilion At Toyota Music Factory", date: Date(), description: "Go to an event concert with 10 friends. Buy tickets in advance and arrange transportation to the venue."),
-                                    Task(name: "Concert", location: "The Pavilion At Toyota Music Factory", date: Date(), description: "Go to an event concert with 10 friends. Buy tickets in advance and arrange transportation to the venue.")]
+    @Published var tasks: [Task] = []
     {
         didSet {
             saveTasks()
@@ -237,7 +236,7 @@ class HomeViewModel: ObservableObject {
     
     // MARK: Discounts
     
-    @Published var discounts: [Discount] = [Discount(name: "Super Saturday", description: "Every Saturday, get 20% off all items in the shop. Hurry up, the offer is valid for one day only!")]
+    @Published var discounts: [Discount] = []
     {
         didSet {
             saveDiscounts()

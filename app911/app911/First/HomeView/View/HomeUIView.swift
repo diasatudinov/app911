@@ -820,7 +820,7 @@ struct EventView: View {
                     Spacer()
                     
                     NavigationLink {
-                        
+                        EventUpView(viewModel: viewModel).navigationBarBackButtonHidden()
                     } label: {
                         ZStack {
                             Rectangle()
@@ -839,7 +839,7 @@ struct EventView: View {
                     
                     
                 }
-            }.frame(height: UIScreen.main.bounds.height * 0.6)
+            }.frame(height: UIScreen.main.bounds.height * 0.8)
                 .padding(.bottom, isKeyboardVisible ? 0 : -35)
         
         
