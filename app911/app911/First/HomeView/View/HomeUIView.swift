@@ -736,7 +736,7 @@ struct HomeUIView: View {
                 }
             }
             
-            if !eventShow {
+            if eventShow {
                 VStack {
                     Spacer()
                     EventView(editOrderShow: $eventShow, viewModel: viewModel)

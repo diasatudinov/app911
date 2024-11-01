@@ -57,3 +57,29 @@ struct Ticket: Hashable, Codable {
         }
     }
 }
+
+struct Task: Hashable, Codable  {
+    var id = UUID()
+    var name: String
+    var location: String
+    var date: Date
+    var description: String
+    var isArchive: Bool {
+        get {
+            let currentDate = Date()
+            let calendar = Calendar.current
+            let orderDateTime = calendar.date(bySettingHour: calendar.component(.hour, from: date),
+                                              minute: calendar.component(.minute, from: date),
+                                              second: 0, of: date) ?? date
+            return orderDateTime < currentDate
+        }
+    }
+}
+
+struct Discount: Hashable, Codable  {
+    var id = UUID()
+    var name: String
+    var description: String
+    var isArchive: Bool  = false
+}
+

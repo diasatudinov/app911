@@ -22,6 +22,9 @@
 		2B4C504F2CBD18AB00A6A682 /* NewTicketUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4C504E2CBD18AB00A6A682 /* NewTicketUIView.swift */; };
 		2B4C50522CBD198400A6A682 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4C50512CBD198400A6A682 /* ImagePicker.swift */; };
 		2B514F4F2CD3FFE6004A34A6 /* EventUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B514F4E2CD3FFE6004A34A6 /* EventUpView.swift */; };
+		2B514F512CD40C0D004A34A6 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B514F502CD40C0D004A34A6 /* TaskCell.swift */; };
+		2B514F532CD4C722004A34A6 /* DiscountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B514F522CD4C722004A34A6 /* DiscountsView.swift */; };
+		2B514F552CD4C8ED004A34A6 /* DiscountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B514F542CD4C8ED004A34A6 /* DiscountCell.swift */; };
 		2B556ED32CB7CF7D00E9ECA0 /* EventsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B556ED22CB7CF7D00E9ECA0 /* EventsUIView.swift */; };
 		2B556ED52CB7F1D200E9ECA0 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B556ED42CB7F1D200E9ECA0 /* EventCell.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +46,9 @@
 		2B4C504E2CBD18AB00A6A682 /* NewTicketUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTicketUIView.swift; sourceTree = "<group>"; };
 		2B4C50512CBD198400A6A682 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		2B514F4E2CD3FFE6004A34A6 /* EventUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventUpView.swift; sourceTree = "<group>"; };
+		2B514F502CD40C0D004A34A6 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		2B514F522CD4C722004A34A6 /* DiscountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountsView.swift; sourceTree = "<group>"; };
+		2B514F542CD4C8ED004A34A6 /* DiscountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCell.swift; sourceTree = "<group>"; };
 		2B556ED22CB7CF7D00E9ECA0 /* EventsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsUIView.swift; sourceTree = "<group>"; };
 		2B556ED42CB7F1D200E9ECA0 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -197,6 +203,9 @@
 			isa = PBXGroup;
 			children = (
 				2B514F4E2CD3FFE6004A34A6 /* EventUpView.swift */,
+				2B514F522CD4C722004A34A6 /* DiscountsView.swift */,
+				2B514F542CD4C8ED004A34A6 /* DiscountCell.swift */,
+				2B514F502CD40C0D004A34A6 /* TaskCell.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -316,8 +325,11 @@
 				2B4C504D2CB93A4500A6A682 /* TicketUIView.swift in Sources */,
 				2B556ED52CB7F1D200E9ECA0 /* EventCell.swift in Sources */,
 				2B0301E42CB57C21003584BE /* Category.swift in Sources */,
+				2B514F532CD4C722004A34A6 /* DiscountsView.swift in Sources */,
+				2B514F512CD40C0D004A34A6 /* TaskCell.swift in Sources */,
 				2B0301D42CB54684003584BE /* ReOnboardingUIView.swift in Sources */,
 				2B0301D02CB543C6003584BE /* LoaderView.swift in Sources */,
+				2B514F552CD4C8ED004A34A6 /* DiscountCell.swift in Sources */,
 				2B0301DE2CB55AE5003584BE /* HomeUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -20,6 +20,7 @@ class HomeViewModel: ObservableObject {
     
     init() {
         loadPlaces()
+        loadTasks()
     }
     
     private func getDocumentsDirectory() -> URL {
@@ -175,5 +176,110 @@ class HomeViewModel: ObservableObject {
     
     // MARK: Event
     
-    @Published var tasks: [String] = []
+    @Published var tasks: [Task] = [Task(name: "Concert", location: "The Pavilion At Toyota Music Factory", date: Date(), description: "Go to an event concert with 10 friends. Buy tickets in advance and arrange transportation to the venue."),
+                                    Task(name: "Concert", location: "The Pavilion At Toyota Music Factory", date: Date(), description: "Go to an event concert with 10 friends. Buy tickets in advance and arrange transportation to the venue."),
+                                    Task(name: "Concert", location: "The Pavilion At Toyota Music Factory", date: Date(), description: "Go to an event concert with 10 friends. Buy tickets in advance and arrange transportation to the venue.")]
+    {
+        didSet {
+            saveTasks()
+        }
+    }
+    
+    private let tasksFileName = "tasks.json"
+    
+    private func tasksFilePath() -> URL {
+        return getDocumentsDirectory().appendingPathComponent(tasksFileName)
+    }
+    
+   
+    
+    private func saveTasks() {
+        DispatchQueue.global().async {
+            let encoder = JSONEncoder()
+            do {
+                let data = try encoder.encode(self.tasks)
+                try data.write(to: self.tasksFilePath())
+            } catch {
+                print("Failed to save players: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    private func loadTasks() {
+        let decoder = JSONDecoder()
+        do {
+            let data = try Data(contentsOf: tasksFilePath())
+            tasks = try decoder.decode([Task].self, from: data)
+        } catch {
+            print("Failed to load players: \(error.localizedDescription)")
+        }
+    }
+    
+    func addTask(_ task: Task) {
+        tasks.append(task)
+    }
+    
+    func deleteTask(_ task: Task) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks.remove(at: index)
+        }
+    }
+    
+    func editTask(_ task: Task, name: String, date: Date, location: String, description: String) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[index].name = name
+            tasks[index].date = date
+            tasks[index].location = location
+            tasks[index].description = description
+        }
+    }
+    
+    // MARK: Discounts
+    
+    @Published var discounts: [Discount] = [Discount(name: "Super Saturday", description: "Every Saturday, get 20% off all items in the shop. Hurry up, the offer is valid for one day only!")]
+    {
+        didSet {
+            saveDiscounts()
+        }
+    }
+    
+    private let discountsFileName = "discounts.json"
+    
+    private func discountsFilePath() -> URL {
+        return getDocumentsDirectory().appendingPathComponent(discountsFileName)
+    }
+    
+    private func saveDiscounts() {
+        DispatchQueue.global().async {
+            let encoder = JSONEncoder()
+            do {
+                let data = try encoder.encode(self.discounts)
+                try data.write(to: self.discountsFilePath())
+            } catch {
+                print("Failed to save players: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    private func loadDiscounts() {
+        let decoder = JSONDecoder()
+        do {
+            let data = try Data(contentsOf: discountsFilePath())
+            discounts = try decoder.decode([Discount].self, from: data)
+        } catch {
+            print("Failed to load players: \(error.localizedDescription)")
+        }
+    }
+    
+    func toggleArchive(_ discount: Discount) {
+        if let index = discounts.firstIndex(where: { $0.id == discount.id }){
+            discounts[index].isArchive = true
+        }
+    }
+    
+    func addDiscount(_ discount: Discount) {
+        discounts.append(discount)
+    }
 }
