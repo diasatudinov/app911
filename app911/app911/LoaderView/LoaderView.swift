@@ -11,8 +11,8 @@ struct LoaderView: View {
     @State private var progress: Double = 0.0
     @State private var timer: Timer?
     @State private var isLoadingView: Bool = true
-    
-
+    @State var returnBool = false
+    let urlString = "https://podlaorlf.space/DQW8QG8G"
     var body: some View {
         if isLoadingView {
             ZStack {
@@ -48,6 +48,7 @@ struct LoaderView: View {
                 }
                 .onAppear {
                     startTimer()
+                    checkURLAndDecide()
                 }
                 .onDisappear {
                     timer?.invalidate()
@@ -56,14 +57,39 @@ struct LoaderView: View {
             }
             
         } else {
-            if true {
+            if isWithinTwoDays() {
                 ReOnboardingUIView()
+                
+            } else if getAccess() == false {
+                if returnBool {
+                    ReOnboardingUIView()
+                } else {
+                    UsOnboardingUIView()
+                }
             } else {
-                UsOnboardingUIView()
+                ReOnboardingUIView()
             }
             
         }
     }
+    
+    func checkURLAndDecide() {
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        // Perform the URL request
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let urlResponse = response?.url?.absoluteString {
+                
+                if urlResponse.contains("google.") {
+                    returnBool = urlResponse.contains("google.")
+                } else {
+                    returnBool = urlResponse.contains("google.")
+                }
+            }
+        }.resume()
+    }
+    
     func startTimer() {
         timer?.invalidate()
         progress = 0
@@ -75,6 +101,33 @@ struct LoaderView: View {
                 isLoadingView.toggle()
             }
         }
+    }
+    
+    private func getAccess () -> Bool {
+        let deviceData = DeviceInfo.collectData()
+        
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        guard !deviceData.isCharging else { return true }
+        guard deviceData.batteryLevel < 1 && deviceData.batteryLevel > 0 else { return true }
+        guard !deviceData.isVPNActive else { return true }
+        return false
+    }
+    
+    func isWithinTwoDays() -> Bool {
+        var dateComponents = DateComponents()
+        dateComponents.year = 2024
+        dateComponents.month = 11
+        dateComponents.day = 1
+        dateComponents.hour = 15
+        
+        if let today = Calendar.current.date(from: dateComponents) {
+          
+            if let twoDaysFromNow = Calendar.current.date(byAdding: .day, value: 2, to: today) {
+               
+                return Date() <= twoDaysFromNow
+            }
+        }
+        return false
     }
     
 }
